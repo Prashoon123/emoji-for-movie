@@ -8,6 +8,7 @@ export default function Home() {
 
   async function onSubmit(event) {
     event.preventDefault();
+
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -37,8 +38,13 @@ export default function Home() {
             placeholder="Enter a movie"
             value={movieInput}
             onChange={(e) => setMovieInput(e.target.value)}
+            required={true}
           />
-          <input type="submit" value="Generate emoji for movie" />
+          <input
+            type="submit"
+            value="Generate emoji for movie"
+            disabled={!movieInput || movieInput[0] === " "}
+          />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
